@@ -31,10 +31,14 @@ export const login = async (req: Request, res: Response) => {
       const token = createToken(String(user._id), String(user.username));
 
       const username = user.username;
+      const name = user.name;
 
-      return res
-        .status(200)
-        .json({ message: "Logged In.", token: token, username: username });
+      return res.status(200).json({
+        message: "Logged In.",
+        token: token,
+        username: username,
+        name: name,
+      });
     } catch (error) {
       res.status(400).json({ error: error });
       console.log(error);
