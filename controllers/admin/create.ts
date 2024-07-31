@@ -5,9 +5,9 @@ import validator from "validator";
 
 export const createAdmin = async (req: Request, res: Response) => {
   try {
-    const { username, password } = req.body;
+    const { name, username, password } = req.body;
 
-    if (!username || !password) {
+    if (!name || !username || !password) {
       return res.status(400).json({ error: "Incomplete details." });
     }
 
@@ -31,6 +31,7 @@ export const createAdmin = async (req: Request, res: Response) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newAdmin = new Admin({
+      name,
       username,
       password: hashedPassword,
     });
